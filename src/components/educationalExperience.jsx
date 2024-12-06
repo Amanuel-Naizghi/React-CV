@@ -1,25 +1,26 @@
-import {useState,useEffect} from 'react';
+import {useState} from 'react';
 import {data} from '../App';
+import addIcon from '../assets/edit.png';
+import removeIcon from '../assets/remove.png';
 
 function EducationalExperience(){
     const [addEducation,setAddEducation]=useState(false);
+    const [editData,setEditData]=useState([]);
 
     return(
         <div className='education-container'>
             <h3>Education</h3>
-            {
-                data[1].educationalExp.length>0&&(
-                    <EducationalReport></EducationalReport>
-                )
-            }
+            {data[1].educationalExp.length>0&&(<EducationalReport setAddEducation={setAddEducation}
+            setEditData={setEditData} editData={editData}></EducationalReport>)}
            
-            {addEducation?(<EducationalDetails setAddEducation={setAddEducation}></EducationalDetails>)
-            :(<button className='add-education' onClick={()=>setAddEducation(true)}>+ Add Education</button>)}
+            {addEducation?(<EducationalDetails setAddEducation={setAddEducation} editData={editData}
+            setEditData={setEditData}></EducationalDetails>)
+            :(<div className="add-education-button-container"><button className='add-education' onClick={()=>setAddEducation(true)}>+ Add Education</button></div>)}
         </div>
     );
 }
 
-function EducationalDetails({setAddEducation}){
+function EducationalDetails({setAddEducation,editData,setEditData}){
 
     function handleSubmit(e){
         e.preventDefault();
@@ -32,49 +33,98 @@ function EducationalDetails({setAddEducation}){
 
         let myNewData={school:schoolInfo,degree:degreeInfo,startDate:startDateInfo,
             endDate:endDateInfo,country:countryInfo,city:cityInfo,id:crypto.randomUUID()};//The id is used for key, b/c the items can be changed when user add or delete educational experience
-        console.log(`myNewData value is ${JSON.stringify(myNewData)}`);//Just for testing output
+        console.log(`myNewData value is ${JSON.stringify(myNewData)}`);//Just for testing output of the information to be added to the data
         data[1].educationalExp.push(myNewData);
-        console.log(`data value is ${JSON.stringify(data)}`);
+        console.log(`data value is ${JSON.stringify(data)}`);//Just for showing the output of the data
         document.querySelector('.educational-details-container').reset();
         setAddEducation(false);
+        setEditData([]);
     }
     
     return(
         <form className='educational-details-container' onSubmit={handleSubmit}>
             <label className='education-details-label'>School/University</label>
-            <input className='school' required type='text'/>
+            <input className='school' required type='text' defaultValue={editData[0]}/>
             <label className='education-details-label'>Degree</label>
-            <input className='degree' type='text' required/>
+            <input className='degree' type='text' defaultValue={editData[1]} required/>
             <label className='education-details-label'>Start date</label>
-            <input className='start-date' type='date'required/>
+            <input className='start-date' type='date' defaultValue={editData[2]}/>
             <label className='education-details-label'>End date</label>
-            <input className='end-date' type='date'required/>
+            <input className='end-date' type='date' defaultValue={editData[3]}/>
             <label className='education-details-label'>Country</label>
-            <input className='country' type='text'required/>
+            <input className='country' type='text' defaultValue={editData[4]} required/>
             <label className='education-details-label'>City</label>
-            <input className='city' type='text'required/>
+            <input className='city' type='text' defaultValue={editData[5]} required/>
             <button className='save' type='submit'>Save</button>
             <button className='cancel'onClick={()=>setAddEducation(false)}>Cancel</button>
         </form>
     );
 }
 
-function EducationalReport(){
-    // console.log("Yep Yep am inside educationalReport component");
-    // data[1].educationalExp.map(item=>{
-    //     console.log(item.id);
-    //     console.log(item.degree);
-    // })
+function EducationalReport({setAddEducation,setEditData,addEducation}){
+    let editable=addEducation===true;//Used for disabling the edit and remove buttons while editing the educational experience fields
+
+    const handleEdit=(e)=>{
+        const parentContainer=e.target.parentNode.parentNode.parentNode;
+        const key=parentContainer.getAttribute('data-key');
+        const indexToEdit=data[1].educationalExp.findIndex((item)=>item.id===key)
+        
+        setAddEducation(true);
+        
+        console.log(indexToEdit);
+        let schoolInfo=data[1].educationalExp[indexToEdit].school;
+        let degreeInfo=data[1].educationalExp[indexToEdit].degree;
+        let startDateInfo=data[1].educationalExp[indexToEdit].startDate;
+        let endDateInfo=data[1].educationalExp[indexToEdit].endDate;
+        let countryInfo=data[1].educationalExp[indexToEdit].country;
+        let cityInfo=data[1].educationalExp[indexToEdit].city;
+        
+        const myOldData=[schoolInfo,degreeInfo,startDateInfo,endDateInfo,countryInfo,cityInfo];
+        console.log(`my old data is ${myOldData}`);//Just for showing the old data to be edited
+        setEditData(myOldData);
+        handleRemove(e);
+    }
+
+    const handleRemove=(e)=>{
+
+        const parentContainer=e.target.parentNode.parentNode.parentNode;
+        const educationReport=document.querySelector('.education-report');
+
+        //for removing the info from the data
+        const key=parentContainer.getAttribute('data-key');
+        const indexToRemove=data[1].educationalExp.findIndex((item)=>item.id===key)
+            
+        data[1].educationalExp.splice(indexToRemove,1);
+        console.log(indexToRemove);
+        console.log(`key value is ${key}`);//Just for testing the key of the item to be removed
+        console.log(`my new data value after removal is ${JSON.stringify(data)}`);//Just for testing output
+
+        //Used for removing the deleted item from the DOM
+        
+        if(e.target.className==="remove"){//This if is only used when the remove button is clicked, when the edit button is clicked its not executed b/c the element is already removed using the setAddEducation state
+            console.log('Noooooo!!');
+            let itemToBeRemoved=document.querySelector(`.report-container[data-key="${key}"]`);
+            educationReport.removeChild(itemToBeRemoved);
+        }
+    }
+
     return(
         <div className="education-report">
             {
                 data[1].educationalExp.map((item)=>(
-                    <div className="report-container" key={item.id}>
+                    <div className="report-container" key={item.id} data-key={item.id}>
                         <div className="report-info">
                             <p>{item.degree} at {item.school}</p>
                             <p>{item.startDate} - {item.endDate}</p>
                         </div>
-                        
+                        <div className="edit-remove-button">
+                            <button className="edit-education"  data-key={item.id}>
+                                <img src={addIcon} alt="edit" className="edit" onClick={handleEdit} disable={editable.toString()}/>
+                            </button>
+                            <button className="remove-education" data-key={item.id}>
+                                <img src={removeIcon} alt="remove" className="remove" onClick={handleRemove} disable={editable.toString()}/>
+                            </button>
+                        </div>
                     </div>
                     
                 ))
@@ -82,5 +132,6 @@ function EducationalReport(){
         </div>
     )
 }
+
 
 export {EducationalExperience};
