@@ -1,9 +1,8 @@
 import {useState} from 'react';
-import {data} from '../App';
 import addIcon from '../assets/edit.png';
 import removeIcon from '../assets/remove.png';
 
-function EducationalExperience(){
+function EducationalExperience({data,setData}){
     const [addEducation,setAddEducation]=useState(false);
     const [editData,setEditData]=useState([]);
 
@@ -11,16 +10,16 @@ function EducationalExperience(){
         <div className='education-container'>
             <h3>Education</h3>
             {data[1].educationalExp.length>0&&(<EducationalReport setAddEducation={setAddEducation}
-            setEditData={setEditData} editData={editData}></EducationalReport>)}
+            setEditData={setEditData} editData={editData} data={data} setData={setData}></EducationalReport>)}
            
             {addEducation?(<EducationalDetails setAddEducation={setAddEducation} editData={editData}
-            setEditData={setEditData}></EducationalDetails>)
+            setEditData={setEditData} data={data} setData={setData}></EducationalDetails>)
             :(<div className="add-education-button-container"><button className='add-education' onClick={()=>setAddEducation(true)}>+ Add Education</button></div>)}
         </div>
     );
 }
 
-function EducationalDetails({setAddEducation,editData,setEditData}){
+function EducationalDetails({setAddEducation,editData,setEditData,data,setData}){
 
     function handleSubmit(e){
         e.preventDefault();
@@ -34,7 +33,14 @@ function EducationalDetails({setAddEducation,editData,setEditData}){
         let myNewData={school:schoolInfo,degree:degreeInfo,startDate:startDateInfo,
             endDate:endDateInfo,country:countryInfo,city:cityInfo,id:crypto.randomUUID()};//The id is used for key, b/c the items can be changed when user add or delete educational experience
         console.log(`myNewData value is ${JSON.stringify(myNewData)}`);//Just for testing output of the information to be added to the data
-        data[1].educationalExp.push(myNewData);
+        setData(prevData=>{
+            return prevData.map(item=>{
+                if(item.educationalExp){
+                    return {...item,educationalExp:[...item.educationalExp,myNewData]};
+                }
+                return item;
+            });
+        });
         console.log(`data value is ${JSON.stringify(data)}`);//Just for showing the output of the data
         document.querySelector('.educational-details-container').reset();
         setAddEducation(false);
@@ -61,7 +67,7 @@ function EducationalDetails({setAddEducation,editData,setEditData}){
     );
 }
 
-function EducationalReport({setAddEducation,setEditData,addEducation}){
+function EducationalReport({setAddEducation,setEditData,addEducation,data,setData}){
     let editable=addEducation===true;//Used for disabling the edit and remove buttons while editing the educational experience fields
 
     const handleEdit=(e)=>{
@@ -88,24 +94,23 @@ function EducationalReport({setAddEducation,setEditData,addEducation}){
     const handleRemove=(e)=>{
 
         const parentContainer=e.target.parentNode.parentNode.parentNode;
-        const educationReport=document.querySelector('.education-report');
 
         //for removing the info from the data
         const key=parentContainer.getAttribute('data-key');
         const indexToRemove=data[1].educationalExp.findIndex((item)=>item.id===key)
             
-        data[1].educationalExp.splice(indexToRemove,1);
-        console.log(indexToRemove);
+        setData(prevData=>{
+            return prevData.map(item=>{
+                if(item.educationalExp){
+                    return {...item,educationalExp:item.educationalExp.filter(obj=>obj.id!==key)};
+                }
+                return item;
+            });
+        });
+        console.log(indexToRemove);//Just for testing which index is gone be removed from the data
         console.log(`key value is ${key}`);//Just for testing the key of the item to be removed
         console.log(`my new data value after removal is ${JSON.stringify(data)}`);//Just for testing output
-
-        //Used for removing the deleted item from the DOM
         
-        if(e.target.className==="remove"){//This if is only used when the remove button is clicked, when the edit button is clicked its not executed b/c the element is already removed using the setAddEducation state
-            console.log('Noooooo!!');
-            let itemToBeRemoved=document.querySelector(`.report-container[data-key="${key}"]`);
-            educationReport.removeChild(itemToBeRemoved);
-        }
     }
 
     return(

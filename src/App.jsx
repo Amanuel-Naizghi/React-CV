@@ -7,17 +7,18 @@ import './App.css'
 
 // let data=[{personalInfo:[]},{educationalExp:[]},{practicalExp:[]},{technicalSkills:[]}];
 
-let data=[{personalInfo:[]},{educationalExp:[]},{practicalExp:[]},{technicalSkills:[]}];
+//let data=[{personalInfo:[]},{educationalExp:[]},{practicalExp:[]},{technicalSkills:[]}];
 
 function App() {
+  const [data,setData]=useState([{personalInfo:[]},{educationalExp:[]},{practicalExp:[]},{technicalSkills:[]}]);
   return(
     <>
       <PersonalInfo></PersonalInfo>
-      <EducationalExperience></EducationalExperience>
+      <EducationalExperience data={data} setData={setData}></EducationalExperience>
       <PracticalExperience></PracticalExperience>
       <TechnicalSkills></TechnicalSkills>
     </>
   );
 }
 
-export {App,data};
+export {App};

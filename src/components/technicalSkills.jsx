@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import {data} from '../App';
+//import {data} from '../App';
 
 function TechnicalSkills(){
     const [addSkill,setAddSkill]=useState(false);
