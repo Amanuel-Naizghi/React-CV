@@ -14,7 +14,7 @@ function EducationalExperience({data,setData}){
            
             {addEducation?(<EducationalDetails setAddEducation={setAddEducation} editData={editData}
             setEditData={setEditData} data={data} setData={setData}></EducationalDetails>)
-            :(<div className="add-education-button-container"><button className='add-education' onClick={()=>setAddEducation(true)}>+ Add Education</button></div>)}
+            :(<button className='add-education' onClick={()=>setAddEducation(true)}>+ Add Educational Experience</button>)}
         </div>
     );
 }
@@ -42,6 +42,7 @@ function EducationalDetails({setAddEducation,editData,setEditData,data,setData})
             });
         });
         console.log(`data value is ${JSON.stringify(data)}`);//Just for showing the output of the data
+        //console.log(`full name is ${data[0].personalInformation[0].fullName}`);
         document.querySelector('.educational-details-container').reset();
         setAddEducation(false);
         setEditData([]);
