@@ -3,6 +3,12 @@ import {useState} from 'react';
 function Form({data}){
     return (
         <div className='form-container'>
+            {data[4].objectiveData.length>0&&
+                <div className='objective-info-container'>
+                    <h4>Objective</h4>
+                    <p>{data[4].objectiveData[0].objectiveInfo}</p>
+                </div>
+            }
             {data[0].personalInformation.length>0&&
                 <div className='personal-info-container'>
                     <h3>{data[0].personalInformation[0].fullName}</h3>
