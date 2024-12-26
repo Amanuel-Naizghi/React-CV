@@ -14,7 +14,7 @@ function EducationalExperience({data,setData}){
            
             {addEducation?(<EducationalDetails setAddEducation={setAddEducation} editData={editData}
             setEditData={setEditData} data={data} setData={setData}></EducationalDetails>)
-            :(<button className='add-education' onClick={()=>setAddEducation(true)}>+ Add Educational Experience</button>)}
+            :(<button className='add-button' onClick={()=>setAddEducation(true)}>+ Add Educational Experience</button>)}
         </div>
     );
 }
@@ -23,12 +23,12 @@ function EducationalDetails({setAddEducation,editData,setEditData,data,setData})
 
     function handleSubmit(e){
         e.preventDefault();
-        let schoolInfo=document.querySelector('.educational-details-container>.school').value;
-        let degreeInfo=document.querySelector('.educational-details-container>.degree').value;
-        let startDateInfo=document.querySelector('.educational-details-container>.start-date').value;
-        let endDateInfo=document.querySelector('.educational-details-container>.end-date').value;
-        let countryInfo=document.querySelector('.educational-details-container>.country').value;
-        let cityInfo=document.querySelector('.educational-details-container>.city').value;
+        let schoolInfo=document.querySelector('.educational-details-container .school').value;
+        let degreeInfo=document.querySelector('.educational-details-container .degree').value;
+        let startDateInfo=document.querySelector('.educational-details-container .start-date').value;
+        let endDateInfo=document.querySelector('.educational-details-container .end-date').value;
+        let countryInfo=document.querySelector('.educational-details-container .country').value;
+        let cityInfo=document.querySelector('.educational-details-container .city').value;
 
         let myNewData={school:schoolInfo,degree:degreeInfo,startDate:startDateInfo,
             endDate:endDateInfo,country:countryInfo,city:cityInfo,id:crypto.randomUUID()};//The id is used for key, b/c the items can be changed when user add or delete educational experience
@@ -50,22 +50,36 @@ function EducationalDetails({setAddEducation,editData,setEditData,data,setData})
     
     return(
         <form className='educational-details-container' onSubmit={handleSubmit}>
-            <label className='education-details-label'>School/University</label>
-            <input className='school' required type='text' defaultValue={editData[0]}/>
-            <label className='education-details-label'>Degree</label>
-            <input className='degree' type='text' defaultValue={editData[1]} required/>
-            <label className='education-details-label'>Start date</label>
-            <input className='start-date' type='date' defaultValue={editData[2]}/>
-            <label className='education-details-label'>End date</label>
-            <input className='end-date' type='date' defaultValue={editData[3]}/>
-            <label className='education-details-label'>Country</label>
-            <input className='country' type='text' defaultValue={editData[4]} required/>
-            <label className='education-details-label'>City</label>
-            <input className='city' type='text' defaultValue={editData[5]} required/>
-            <button className='save' type='submit'>Save</button>
-            <button className='cancel'onClick={()=>setAddEducation(false)}>Cancel</button>
+            <div className='input-container'>
+                <label className='education-details-label'>School/University</label>
+                <input className='school' required type='text' defaultValue={editData[0]}/>
+            </div>
+            <div className='input-container'>
+                <label className='education-details-label'>Degree</label>
+                <input className='degree' type='text' defaultValue={editData[1]} required/>
+            </div>
+            <div className='input-container'>
+                <label className='experience-details-label'>Start date</label>
+                <input className='start-date' type='date' defaultValue={editData[2]} />
+            </div>   
+            <div className='input-container'>
+                <label className='education-details-label'>End date</label>
+                <input className='end-date' type='date' defaultValue={editData[3]}/>
+            </div>
+            <div className='input-container'>
+                <label className='education-details-label'>Country</label>
+                <input className='country' type='text' defaultValue={editData[4]} required/>
+            </div>
+            <div className='input-container'>
+                <label className='education-details-label'>City</label>
+                <input className='city' type='text' defaultValue={editData[5]} required/>
+            </div>
+            <div className='button-container'>
+                <button className='save' type='submit'>Save</button>
+                <button className='cancel'onClick={()=>setAddEducation(false)}>Cancel</button>
+            </div>          
         </form>
-    );
+    )
 }
 
 function EducationalReport({setAddEducation,setEditData,addEducation,data,setData}){

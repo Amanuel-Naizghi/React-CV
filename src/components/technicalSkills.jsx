@@ -14,7 +14,7 @@ function TechnicalSkillsInformation({data,setData}){
 
             {addSkill?(<TechnicalSkillDetails setAddSkill={setAddSkill} editData={editData}
             setEditData={setEditData} data={data} setData={setData}></TechnicalSkillDetails>)
-             :(<button className='add-skill' onClick={()=>setAddSkill(true)}>+ Add Skill</button>)};
+             :(<button className='add-button' onClick={()=>setAddSkill(true)}>+ Add Skill</button>)}
         </div>
     );
 }
@@ -23,8 +23,8 @@ function TechnicalSkillDetails({setAddSkill,editData,setEditData,data,setData}){
 
     function handleSubmit(e){
         e.preventDefault();
-        let skillName=document.querySelector('.skills-details-container>.skill-name').value;
-        let skillDetails=document.querySelector('.skills-details-container>.skill-details').value;
+        let skillName=document.querySelector('.skills-details-container .skill-name').value;
+        let skillDetails=document.querySelector('.skills-details-container .skill-details').value;
 
         let myNewData={skillName:skillName,skillDetails:skillDetails,id:crypto.randomUUID()};
         console.log(`myNewData value is ${JSON.stringify(myNewData)}`);//Just for testing output of the information to be added to the data
@@ -44,12 +44,18 @@ function TechnicalSkillDetails({setAddSkill,editData,setEditData,data,setData}){
 
     return(
         <form className='skills-details-container' onSubmit={handleSubmit}>
-            <label className='skills-details-label'>Skill Name</label>
-            <input className='skill-name' type='text' defaultValue={editData[0]} required></input>
-            <label className='skills-details-label'>Skill Details</label>
-            <textarea className='skill-details' defaultValue={editData[1]}></textarea>
-            <button className='save' type='submit'>Save</button>
-            <button className='cancel'onClick={()=>setAddSkill(false)}>Cancel</button>
+            <div className='input-container'>
+                <label className='skills-details-label'>Skill Name</label>
+                <input className='skill-name' type='text' defaultValue={editData[0]} required></input>
+            </div>
+            <div className='input-container'>
+                <label className='skills-details-label'>Skill Details</label>
+                <textarea className='skill-details' defaultValue={editData[1]}></textarea>
+            </div>
+            <div className='button-container'>
+                <button className='save' type='submit'>Save</button>
+                <button className='cancel'onClick={()=>setAddSkill(false)}>Cancel</button>
+            </div>           
         </form>
     );
 }

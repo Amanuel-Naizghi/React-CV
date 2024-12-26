@@ -14,22 +14,22 @@ function PracticalExperience({data,setData}){
 
             {addExperience?(<ExperienceDetails setAddExperience={setAddExperience} editData={editData}
             setEditData={setEditData} data={data} setData={setData}></ExperienceDetails>)
-             :(<button className='add-experience' onClick={()=>setAddExperience(true)}>+ Add Practical Experience</button>)};
+             :(<button className='add-button' onClick={()=>setAddExperience(true)}>+ Add Practical Experience</button>)}
         </div>
-    );
+    )
 }
 
 function ExperienceDetails({setAddExperience,editData,setEditData,data,setData}){
 
     function handleSubmit(e){
         e.preventDefault();
-        let positionInfo=document.querySelector('.experience-details-container>.position').value;
-        let companyInfo=document.querySelector('.experience-details-container>.company').value;
-        let startDateInfo=document.querySelector('.experience-details-container>.start-date').value;
-        let endDateInfo=document.querySelector('.experience-details-container>.end-date').value;
-        let countryInfo=document.querySelector('.experience-details-container>.country').value;
-        let cityInfo=document.querySelector('.experience-details-container>.city').value;
-        let workInfo=document.querySelector('.experience-details-container>.work-details').value;
+        let positionInfo=document.querySelector('.experience-details-container .position').value;
+        let companyInfo=document.querySelector('.experience-details-container .company').value;
+        let startDateInfo=document.querySelector('.experience-details-container .start-date').value;
+        let endDateInfo=document.querySelector('.experience-details-container .end-date').value;
+        let countryInfo=document.querySelector('.experience-details-container .country').value;
+        let cityInfo=document.querySelector('.experience-details-container .city').value;
+        let workInfo=document.querySelector('.experience-details-container .work-details').value;
 
         let myNewData={position:positionInfo,company:companyInfo,startDate:startDateInfo,
             endDate:endDateInfo,country:countryInfo,city:cityInfo,workDetails:workInfo,id:crypto.randomUUID()};//The id is used for key, b/c the items can be changed when user add or delete educational experience
@@ -40,7 +40,7 @@ function ExperienceDetails({setAddExperience,editData,setEditData,data,setData})
                     return {...item,practicalExp:[...item.practicalExp,myNewData]};
                 }
                 return item;
-            });
+            })
         });
         console.log(`data value is ${JSON.stringify(data)}`);//Just for showing the output of the data
         document.querySelector('.experience-details-container').reset();
@@ -50,24 +50,40 @@ function ExperienceDetails({setAddExperience,editData,setEditData,data,setData})
     
     return(
         <form className='experience-details-container' onSubmit={handleSubmit}>
-            <label className='experience-details-label'>Position/Title</label>
-            <input className='position' type='text' defaultValue={editData[0]} required/>
-            <label className='experience-details-label'>Company Name</label>
-            <input className='company' type='text' defaultValue={editData[1]} required/>
-            <label className='experience-details-label'>Start date</label>
-            <input className='start-date' type='date' defaultValue={editData[2]} />
-            <label className='experience-details-label'>End date</label>
-            <input className='end-date' type='date' defaultValue={editData[3]} />
-            <label className='experience-details-label'>Country</label>
-            <input className='country' type='text' defaultValue={editData[4]} required/>
-            <label className='experience-details-label'>City</label>
-            <input className='city' type='text' defaultValue={editData[5]} required/>
-            <label className='experience-details-label'>Work details</label>
-            <textarea className='work-details' defaultValue={editData[6]} ></textarea>
-            <button className='save' type='submit'>Save</button>
-            <button className='cancel'onClick={()=>setAddExperience(false)}>Cancel</button>
+            <div className='input-container'>
+                <label className='experience-details-label'>Position/Title</label>
+                <input className='position' type='text' defaultValue={editData[0]} required/>
+            </div>
+            <div className='input-container'>
+                <label className='experience-details-label'>Company Name</label>
+                <input className='company' type='text' defaultValue={editData[1]} required/>
+            </div>
+            <div className='input-container'>
+                <label className='experience-details-label'>Start date</label>
+                <input className='start-date' type='date' defaultValue={editData[2]} />
+            </div>
+            <div className='input-container'>
+                <label className='experience-details-label'>End date</label>
+                <input className='end-date' type='date' defaultValue={editData[3]} />
+            </div>
+            <div className='input-container'>
+                <label className='experience-details-label'>Country</label>
+                <input className='country' type='text' defaultValue={editData[4]} required/>
+            </div>
+            <div className='input-container'>
+                <label className='experience-details-label'>City</label>
+                <input className='city' type='text' defaultValue={editData[5]} required/>
+            </div>
+            <div className='input-container'>
+                <label className='experience-details-label'>Work details</label>
+                <textarea className='work-details' defaultValue={editData[6]} ></textarea>
+            </div>
+            <div className='button-container'>
+                <button className='save' type='submit'>Save</button>
+                <button className='cancel'onClick={()=>setAddExperience(false)}>Cancel</button>
+            </div>           
         </form>
-    );
+    )
 }
 
 function PracticalReport({setAddExperience,addExperience,setEditData,data,setData}){

@@ -8,7 +8,7 @@ function PersonalInfo({data,setData}){
     const [editData,setEditData]=useState([]);
 
     return(
-        <div className='education-container'>
+        <div className='personal-info-container'>
             <h3>Personal Information</h3>
             {data[0].personalInformation.length>0&&(<PersonalInfoReport addPersonalInfo={addPersonalInfo} setEditData={setEditData}
              editData={editData}setAddPersonalInfo={setAddPersonalInfo} data={data} setData={setData} setCounter={setCounter}></PersonalInfoReport>)}
@@ -17,7 +17,7 @@ function PersonalInfo({data,setData}){
             editData={editData} setAddPersonalInfo={setAddPersonalInfo}setData={setData}setCounter={setCounter}counter={counter}></PersonalInfoDetails>)}
 
             {(!addPersonalInfo&&counter===0)&&
-            (<button className='add-personal-info' onClick={()=>setAddPersonalInfo(true)}>+ Add Personal Information</button>)
+            (<button className='add-button' onClick={()=>setAddPersonalInfo(true)}>+ Add Personal Information</button>)
             }
         </div>
     );
@@ -27,12 +27,12 @@ function PersonalInfoDetails({data,setData,setAddPersonalInfo,setEditData,editDa
 
     function handleSubmit(e){
         e.preventDefault();
-        let fullName=document.querySelector('.personal-details-container>.full-name').value;
-        let phoneNum=document.querySelector('.personal-details-container>.phone-number').value;
-        let address=document.querySelector('.personal-details-container>.address').value;
-        let email=document.querySelector('.personal-details-container>.email').value;
-        let github=document.querySelector('.personal-details-container>.github').value;
-        let linkedin=document.querySelector('.personal-details-container>.linkedin').value;
+        let fullName=document.querySelector('.personal-details-container .full-name').value;
+        let phoneNum=document.querySelector('.personal-details-container .phone-number').value;
+        let address=document.querySelector('.personal-details-container .address').value;
+        let email=document.querySelector('.personal-details-container .email').value;
+        let github=document.querySelector('.personal-details-container .github').value;
+        let linkedin=document.querySelector('.personal-details-container .linkedin').value;
 
         let myNewData={fullName,phoneNum,address,email,github,linkedin,id:crypto.randomUUID()};//The id is used for key, b/c the items can be changed when user add or delete educational experience
         console.log(`myNewData value is ${JSON.stringify(myNewData)}`);//Just for testing output of the information to be added to the data
@@ -53,33 +53,46 @@ function PersonalInfoDetails({data,setData,setAddPersonalInfo,setEditData,editDa
 
     return(
         <form className='personal-details-container' onSubmit={handleSubmit}>
-            <h1>My Resume</h1>
-            <label className='personal-info-label'>
-                Your Full Name
-            </label>
-            <input type='text'className='full-name' defaultValue={editData[0]} required/>
-            <label className='personal-info-label' >
-                Phone Number
-            </label>
-            <input type='number'className='phone-number' defaultValue={editData[1]} required/>
-            <label className='personal-info-label' >
-                Address
-            </label>
-            <input type='text'className='address' defaultValue={editData[2]} required/>
-            <label className='personal-info-label'>
-                Email
-            </label>
-            <input type='email'className='email' defaultValue={editData[3]} required/>
-            <label className='personal-info-label'>
-                Github
-            </label>
-            <input type='text'className='github' defaultValue={editData[4]} required/>
-            <label className='personal-info-label'>
-                Linkedin
-            </label>
-            <input type='text'className='linkedin' defaultValue={editData[5]} required/>
-            <button className='save' type='submit'>Save</button>
-            <button className='cancel'onClick={()=>setAddPersonalInfo(false)}>Cancel</button>   
+            <div className='input-container'>
+                <label className='personal-info-label'>
+                    Your Full Name
+                </label>
+                <input type='text'className='full-name' defaultValue={editData[0]} required/>
+            </div>
+            <div className='input-container'>
+                <label className='personal-info-label' >
+                    Phone Number
+                </label>
+                <input type='number'className='phone-number' defaultValue={editData[1]} required/>
+            </div>
+            <div className='input-container'>
+                <label className='personal-info-label' >
+                    Address
+                </label>
+                <input type='text'className='address' defaultValue={editData[2]} required/>
+            </div>
+            <div className='input-container'>
+                <label className='personal-info-label'>
+                    Email
+                </label>
+                <input type='email'className='email' defaultValue={editData[3]} required/>
+            </div>
+            <div className='input-container'>
+                <label className='personal-info-label'>
+                    Github
+                </label>
+                <input type='text'className='github' defaultValue={editData[4]} required/>
+            </div>
+            <div className='input-container'>
+                <label className='personal-info-label'>
+                    Linkedin
+                </label>
+                <input type='text'className='linkedin' defaultValue={editData[5]} required/>
+            </div>
+            <div className='button-container'>
+                <button className='save' type='submit'>Save</button>
+                <button className='cancel'onClick={()=>setAddPersonalInfo(false)}>Cancel</button> 
+            </div>             
         </form>
     );
 }

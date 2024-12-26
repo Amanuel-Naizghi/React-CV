@@ -1,69 +1,169 @@
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+*{
+  padding:0;
+  margin:0;
 }
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
+@font-face{
+  font-family:'font1';
+  src:url('./assets/fonts/myFont1.ttf')format('truetype');
 }
-a:hover {
-  color: #535bf2;
+body{
+  font-family: 'font1';
 }
-
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+.main-container>.header{
+  display:flex;
+  justify-content:space-between;
 }
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+.main-container>.header>.image-container{
+  display:flex;
+  align-items:center;
 }
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
+.main-container>.header>.image-container>.resume-icon{
+  width:70px;
+  height:70px;
+  margin:0 1rem 0 0;
 }
-button:hover {
-  border-color: #646cff;
+.main-container>.header>.download-button{
+  display:flex;
+  width:150px;
+  height:50px;
+  background:#A66E38;
+  border:none;
+  border-radius:10px;
+  align-items:center;
+  justify-content: center;
 }
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+.main-container>.header>.download-button:hover{
+  background:#EFF3EA;
 }
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
-} 
- 
+.main-container>.header>.download-container>.download{
+  width:25px;
+  height:25px;
+  margin:0 0 0 0.8rem;
+}
+.main-container{
+  display:flex;
+  flex-direction:column;
+  padding:1.2rem 0.8rem;
+}
+.main-container>.headed-title{
+  align-self:center;
+  font-size:1.7rem;
+  margin:1.5rem 0 1rem 0;
+}
+.main-container>.objective-container>h3,.personal-info-container>h3,
+.education-container>h3,.experience-container>h3,.skill-container>h3{
+  font-size:1.2rem;
+  margin:1rem 0 0.8rem 0;
+}
+.main-container .add-button{
+  border-radius:10px;
+  border:none;
+  font-size:1rem;
+  background-color:white;
+  color:#A66E38;
+  font-weight:600;
+}
+.educational-details-container,.personal-details-container,
+.experience-details-container{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  width:700px;
+}
+.main-container>div>form>.input-container>input,.main-container>div>form>.input-container>textarea{
+  width:300px;
+  height:1.4rem;
+  background-color:lightgray;
+  border:none;
+  border-radius:5px;
+  padding:0.2rem;
+}
+.main-container>div>form>.input-container>textarea{
+  width:100%;
+  height:50px;
+  background-color:lightgray;
+  border:none;
+  border-radius:5px;
+  padding:0.2rem;
+}
+.objective-details-container,.skills-details-container{
+  display:grid;
+  grid-template-columns: 1fr;
+}
+.objective-details-container>.input-container,.skills-details-container>.input-container{
+  width:650px;
+}
+.main-container>div>form>.input-container{
+  display:flex;
+  flex-direction:column;
+  padding:0.3rem 0;
+}
+.main-container>div>form>.button-container{
+  display:flex;
+}
+.main-container>div>form>.button-container button{
+  margin:1.2rem 0.3rem 0 0;
+  width:100px;
+  height:1.5rem;
+  font-size:1rem;
+  border:none;
+  border-radius:5px;
+}
+.main-container>div>form>.button-container>.save{
+  background-color: #A66E38;
+}
+.main-container>div>form label{
+  font-size:1rem;
+  color:grey;
+  margin-bottom:0.3rem;
+}
+.main-container>div>.experience-details-container>.button-container{
+  grid-row:5/6;
+}
+.objective-report>.report-container{
+  display:flex;
+  flex-direction:row;
+  justify-content: space-between;
+  background:#EFF3EA;
+  border-radius:10px;
+  padding:0.4rem;
+  height:70px;
+}
+.objective-report>.report-container button{
+  border:none;
+}
+.objective-report>.report-container button>img{
+  width:20px;
+  height:20px;
+  margin-left:0.7rem;
+}
+.main-container>.personal-info-container .report-container,
+.main-container>.education-container .report-container,
+.main-container>.experience-container .report-container,
+.main-container>.skill-container .report-container{
+  display:flex;
+  flex-direction:row;
+  justify-content: space-between;
+  align-items:center;
+  background:#EFF3EA;
+  border-radius: 10px;
+  padding:0.4rem;
+  font-size:0.8rem;
+  color:grey;
+}
+.main-container>.education-container .report-container,
+.main-container>.experience-container .report-container,
+.main-container>.skill-container .report-container{
+  margin-bottom:0.5rem;
+}
+.main-container>.personal-info-container .report-container button,
+.education-container .report-container button,.experience-container .report-container button,
+.skill-container .report-container button{
+  border:none;
+}
+.main-container>.personal-info-container .report-container button>img,
+.education-container .report-container button>img,.experience-container .report-container button>img,
+.skill-container .report-container button>img{
+  width:20px;
+  height:20px;
+  margin-left:0.7rem;
+}
