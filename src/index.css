@@ -35,7 +35,7 @@ body{
 .main-container>.header>.download-button:hover{
   background:#EFF3EA;
 }
-.main-container>.header>.download-container>.download{
+.main-container>.header>.download-button>.download{
   width:25px;
   height:25px;
   margin:0 0 0 0.8rem;
@@ -166,4 +166,140 @@ body{
   width:20px;
   height:20px;
   margin-left:0.7rem;
+}
+.form-container{
+  display:flex;
+  justify-content:center;
+  background:#EFF3EA;
+  padding:1.5rem 0 0 0;
+}
+.form-container>.resume-display{
+  display:flex;
+  flex-direction:column;
+  height:auto;
+  width:750px;
+  background:white;
+  padding:0.4rem 0.8rem;
+}
+.resume-display>.personal-info-container{
+  display:flex;
+  flex-direction:column;
+  align-items: center;
+  margin-bottom: 1.2rem;
+}
+.resume-display>.objective-info-container{
+  margin-bottom:0.5rem;
+}
+.resume-display>.objective-info-container>hr,.resume-display>.educational-info-container>hr,
+.resume-display>.experience-info-container>hr,.resume-display>.technical-skills-record>hr{
+  margin-bottom:0.3rem;
+}
+.resume-display>.educational-info-container>.educational-record,
+.resume-display>.experience-info-container .experience-record{
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:0.5rem;
+}
+.resume-display>.experience-info-container div,.resume-display>.technical-skills-record>.technical-skills{
+  margin-bottom:0.5rem;
+}
+.resume-display>.educational-info-container>.educational-record .school-name,
+.resume-display>.experience-info-container .experience-record .position,
+.resume-display>.technical-skills-record .skill-name{
+  font-weight:700;
+}
+.resume-display>.educational-info-container>.educational-record .address,
+.resume-display>.experience-info-container .experience-record .address{
+  display:flex;
+  justify-content: end;
+}
+@media (max-width:700px){
+  .main-container>.header>.image-container>.resume-icon{
+    width:70px;
+    height:70px;
+    margin:0 1rem 0 0;
+  }
+  .main-container>.header h1{
+    font-size:1.2rem;
+  }
+  .main-container>.header>.download-button{
+    display:flex;
+    width:80px;
+    height:30px;
+    padding:0.2rem;
+    margin-top:0.1rem;
+  }
+  .main-container>.header>.download-button>p{
+    font-size:0.5rem;
+  }
+  .main-container>.header>.download-button>.download{
+    width:18px;
+    height:18px;
+    margin:0 0 0 0.8rem;
+  }
+  .main-container>.headed-title{
+    align-self:center;
+    font-size:1rem;
+    margin:1.5rem 0 0.5rem 0;
+  }
+  .main-container>.objective-container>h3,.personal-info-container>h3,
+  .education-container>h3,.experience-container>h3,.skill-container>h3{
+    font-size:1rem;
+    margin:0.7rem 0 0.4rem 0;
+  }
+  .main-container>.personal-info-container .report-container,
+  .main-container>.education-container .report-container,
+  .main-container>.experience-container .report-container,
+  .main-container>.skill-container .report-container{
+    padding:0.4rem;
+    font-size:0.8rem;
+  }
+  .objective-report>.report-container{
+    height:auto;
+  }
+  .objective-report>.report-container p{
+    font-size:0.8rem;
+  }
+  .objective-report>.report-container .edit-remove-button{
+    display:flex;
+    flex-direction:column;
+    justify-content: center;
+  }
+  .resume-display>.objective-info-container p,.resume-display>.educational-info-container p,
+  .resume-display>.experience-info-container,.resume-display>.technical-skills-record p{
+    font-size:0.8rem;
+  }
+  .main-container>div>form>.input-container>textarea{
+    width:325px;
+    height:50px;
+    background-color:lightgray;
+    border:none;
+    border-radius:5px;
+    padding:0.2rem;
+  }
+  .main-container>div>form>.button-container button{
+    margin:1.2rem 0.3rem 0 0;
+    width:50px;
+    height:1.2rem;
+    font-size:0.8rem;
+  }
+  .main-container .add-button{
+    font-size:0.8rem;
+  }
+  .main-container>div>form>.input-container>input,.main-container>div>form>.input-container>textarea{
+    width:150px;
+    height:0.8rem;
+    background-color:lightgray;
+    border:none;
+    border-radius:5px;
+    padding:0.2rem;
+    font-size:0.7rem;
+  }
+  .educational-details-container,.personal-details-container,
+  .experience-details-container{
+    width:325px;
+  }
+  .main-container>div>form label{
+    font-size:0.8rem;
+  }
 }
