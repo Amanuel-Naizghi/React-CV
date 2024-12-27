@@ -36,6 +36,7 @@ function PersonalInfoDetails({data,setData,setAddPersonalInfo,setEditData,editDa
 
         let myNewData={fullName,phoneNum,address,email,github,linkedin,id:crypto.randomUUID()};//The id is used for key, b/c the items can be changed when user add or delete educational experience
         console.log(`myNewData value is ${JSON.stringify(myNewData)}`);//Just for testing output of the information to be added to the data
+        //Adding the user inputs into the data after its saved
         setData(prevData=>{
             return prevData.map(item=>{
                 if(item.personalInformation){
@@ -101,12 +102,12 @@ function PersonalInfoReport({setAddPersonalInfo,addPersonalInfo,data,setData,set
     let editable=addPersonalInfo===true;//Used for disabling the edit and remove buttons while editing the educational experience fields
 
     const handleEdit=(e)=>{
-        setAddPersonalInfo(true);
+        setAddPersonalInfo(true);//The form will appear as soon as the edit button is clicked
         handleRemove(e);
     }
 
     const handleRemove=(e)=>{
-            
+        //Removing all the previous personal information details from data
         setData(prevArray=>
             prevArray.map(item=>
                 item.personalInformation!==undefined?{...item,personalInformation:[]}

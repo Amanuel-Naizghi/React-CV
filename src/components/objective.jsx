@@ -5,7 +5,7 @@ import removeIcon from '../assets/remove.png';
 function ObjectiveDetails({data,setData}){
     const [addObjective,setAddObjective]=useState(false);
     const [editData,setEditData]=useState([]);
-    const [counter,setCounter]=useState(0);
+    const [counter,setCounter]=useState(0);//Used for tracking the add objective input, it only allows to add objective just once
 
     return(
         <div className='objective-container'>
@@ -32,6 +32,7 @@ function ObjectiveDetailsInput({setAddObjective,editData,setEditData,data,setDat
 
         let myNewData={objectiveInfo,id:crypto.randomUUID()};//The id is used for key, b/c the items can be changed when user add or delete educational experience
         console.log(`myNewData value is ${JSON.stringify(myNewData)}`);//Just for testing output of the information to be added to the data
+        //Adding the new user inputs into the data after the submit button is clicked
         setData(prevData=>{
             return prevData.map(item=>{
                 if(item.objectiveData){
@@ -62,7 +63,7 @@ function ObjectiveDetailsInput({setAddObjective,editData,setEditData,data,setDat
 function ObjectiveReport({setAddObjective,addObjective,setEditData,data,setData,setCounter}){
     let editable=addObjective===true;//Used for disabling the edit and remove buttons while editing the objective
     const handleEdit=(e)=>{
-        setAddObjective(true);
+        setAddObjective(true);//After the add objective data is clicked the form for the objective will appear
         
         let objectiveDetail=data[4].objectiveData[0].objectiveInfo;
         
@@ -73,14 +74,14 @@ function ObjectiveReport({setAddObjective,addObjective,setEditData,data,setData,
     }
 
     const handleRemove=(e)=>{
-  
+        //Removing the previous objective from the data
         setData(prevArray=>
             prevArray.map(item=>
                 item.objectiveData!==undefined?{...item,objectiveData:[]}
                 :item
             )
         )
-        e.target.className==='remove'&&setEditData([]);
+        e.target.className==='remove'&&setEditData([]);//If the remove button is clicked it will make the edit data state empty
         console.log(`my new data value after removal is ${JSON.stringify(data)}`);//Just for testing output
         setCounter(0);    
     }

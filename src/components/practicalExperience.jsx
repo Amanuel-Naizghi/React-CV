@@ -3,8 +3,8 @@ import addIcon from '../assets/edit.png';
 import removeIcon from '../assets/remove.png';
 
 function PracticalExperience({data,setData}){
-    const [addExperience,setAddExperience]=useState(false);
-    const [editData,setEditData]=useState([]);
+    const [addExperience,setAddExperience]=useState(false);//Used for adding skills
+    const [editData,setEditData]=useState([]);//Used to record the previously filled data so that it will added in the inputs after edit button is clicked
 
     return (
         <div className='experience-container'>
@@ -34,6 +34,7 @@ function ExperienceDetails({setAddExperience,editData,setEditData,data,setData})
         let myNewData={position:positionInfo,company:companyInfo,startDate:startDateInfo,
             endDate:endDateInfo,country:countryInfo,city:cityInfo,workDetails:workInfo,id:crypto.randomUUID()};//The id is used for key, b/c the items can be changed when user add or delete educational experience
         console.log(`myNewData value is ${JSON.stringify(myNewData)}`);//Just for testing output of the information to be added to the data
+        //adding the newly filled data into the data
         setData(prevData=>{
             return prevData.map(item=>{
                 if(item.practicalExp){

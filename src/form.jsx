@@ -3,7 +3,7 @@ import {useState} from 'react';
 function Form({data}){
     return (
         <div className='resume-display'>
-        
+            {/* Rendering personal information details from the data holder */}
             {data[0].personalInformation.length>0&&
                 <div className='personal-info-container'>
                     <h3>{data[0].personalInformation[0].fullName}</h3>
@@ -12,7 +12,7 @@ function Form({data}){
                     <p>{data[0].personalInformation[0].github}|{data[0].personalInformation[0].linkedin}</p>
                 </div>
             }
-
+            {/* Rendering objective information details from the data holder */}
             {data[4].objectiveData.length>0&&
                 <div className='objective-info-container'>
                     <h4>Objective</h4>
@@ -20,7 +20,7 @@ function Form({data}){
                     <p>{data[4].objectiveData[0].objectiveInfo}</p>
                 </div>
             }
-
+            {/* Rendering educational information details from the data holder */}
             {data[1].educationalExp.length>0&&
                 <div className="educational-info-container">
                     <h4>Educational Record</h4>
@@ -39,7 +39,7 @@ function Form({data}){
                     ))}
                 </div>
             }
-
+            {/* Rendering experience information details from the data holder */}
             {data[2].practicalExp.length>0&&
                 <div className="experience-info-container">
                     <h4>Practical Experience Record</h4>
@@ -62,7 +62,7 @@ function Form({data}){
                     ))}
                 </div>
             }
-
+            {/* Rendering technical skill details from the data holder */}
             {data[3].technicalSkills.length>0&&
                 <div className="technical-skills-record">
                     <h4>Technical Skills</h4>

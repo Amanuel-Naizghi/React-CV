@@ -3,8 +3,8 @@ import addIcon from '../assets/edit.png';
 import removeIcon from '../assets/remove.png';
 
 function EducationalExperience({data,setData}){
-    const [addEducation,setAddEducation]=useState(false);
-    const [editData,setEditData]=useState([]);
+    const [addEducation,setAddEducation]=useState(false);//Used for displaying and hiding the add education form
+    const [editData,setEditData]=useState([]);////Used to record the previously filled data so that it will added in the inputs after edit button is clicked
 
     return(
         <div className='education-container'>
@@ -113,7 +113,7 @@ function EducationalReport({setAddEducation,setEditData,addEducation,data,setDat
         //for removing the info from the data
         const key=parentContainer.getAttribute('data-key');
         const indexToRemove=data[1].educationalExp.findIndex((item)=>item.id===key)
-            
+        //Removing the clicked item from the data
         setData(prevData=>{
             return prevData.map(item=>{
                 if(item.educationalExp){

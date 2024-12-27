@@ -3,8 +3,8 @@ import addIcon from '../assets/edit.png';
 import removeIcon from '../assets/remove.png';
 
 function TechnicalSkillsInformation({data,setData}){
-    const [addSkill,setAddSkill]=useState(false);
-    const [editData,setEditData]=useState([]);
+    const [addSkill,setAddSkill]=useState(false);//Used for adding skills, it opens and closes the form for adding skill
+    const [editData,setEditData]=useState([]);//Used to record the previously filled data so that it will added in the inputs after edit button is clicked
 
     return(
         <div className='skill-container'>
@@ -28,6 +28,7 @@ function TechnicalSkillDetails({setAddSkill,editData,setEditData,data,setData}){
 
         let myNewData={skillName:skillName,skillDetails:skillDetails,id:crypto.randomUUID()};
         console.log(`myNewData value is ${JSON.stringify(myNewData)}`);//Just for testing output of the information to be added to the data
+        //adding the newly filled data into the data
         setData(prevData=>{
             return prevData.map(item=>{
                 if(item.technicalSkills){
@@ -37,7 +38,7 @@ function TechnicalSkillDetails({setAddSkill,editData,setEditData,data,setData}){
             });
         });
         console.log(`data value is ${JSON.stringify(data)}`);//Just for showing the output of the data
-        document.querySelector('.skills-details-container').reset();
+        document.querySelector('.skills-details-container').reset();//Resting the input container after submitting the form
         setAddSkill(false);
         setEditData([]); 
     }
@@ -68,7 +69,7 @@ function SkillReport({setAddSkill,addSkill,setEditData,data,setData}){
         const key=parentContainer.getAttribute('data-key');
         const indexToEdit=data[3].technicalSkills.findIndex((item)=>item.id===key)
         
-        setAddSkill(true);
+        setAddSkill(true);//After edit button is clicked the input form will appear
         
         console.log(indexToEdit);
         let skillInfo=data[3].technicalSkills[indexToEdit].skillName;
@@ -76,7 +77,7 @@ function SkillReport({setAddSkill,addSkill,setEditData,data,setData}){
         
         const myOldData=[skillInfo,skillDetails];
         console.log(`my old data is ${myOldData}`);//Just for showing the old data to be edited
-        setEditData(myOldData);
+        setEditData(myOldData);//Putting the previous inputs into edit data state
         handleRemove(e);
     }
 
@@ -86,8 +87,8 @@ function SkillReport({setAddSkill,addSkill,setEditData,data,setData}){
 
         //for removing the info from the data
         const key=parentContainer.getAttribute('data-key');
-        const indexToRemove=data[3].technicalSkills.findIndex((item)=>item.id===key)
-            
+        const indexToRemove=data[3].technicalSkills.findIndex((item)=>item.id===key);//Finding the index of the item to be removed
+        //Removing the clicked item from the data  
         setData(prevData=>{
             return prevData.map(item=>{
                 if(item.technicalSkills){

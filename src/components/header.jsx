@@ -3,6 +3,7 @@ import downloadIcon from '../assets/downloadIcon.png';
 import jsPDF from 'jspdf';;
 import html2canvas from 'html2canvas';
 function Header(){
+    //Used for downloading the html file as pdf
     const handleDownloadPDF=()=>{
     const input=document.querySelector('.resume-display');
         html2canvas(input) 

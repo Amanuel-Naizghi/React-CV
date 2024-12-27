@@ -179,7 +179,7 @@ body{
   height:auto;
   width:750px;
   background:white;
-  padding:0.4rem 0.8rem;
+  padding:0 0.8rem;
 }
 .resume-display>.personal-info-container{
   display:flex;
@@ -289,11 +289,11 @@ body{
   .main-container>div>form>.input-container>input,.main-container>div>form>.input-container>textarea{
     width:150px;
     height:0.8rem;
-    background-color:lightgray;
-    border:none;
-    border-radius:5px;
     padding:0.2rem;
     font-size:0.7rem;
+  }
+  .main-container>div>form>.input-container>textarea{
+    height:50px;
   }
   .educational-details-container,.personal-details-container,
   .experience-details-container{
