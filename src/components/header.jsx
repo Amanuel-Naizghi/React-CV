@@ -2,19 +2,38 @@ import headerIcon from '../assets/resume-icon.png';
 import downloadIcon from '../assets/downloadIcon.png';
 import jsPDF from 'jspdf';;
 import html2canvas from 'html2canvas';
+
+
 function Header(){
-    //Used for downloading the html file as pdf
-    const handleDownloadPDF=()=>{
-    const input=document.querySelector('.resume-display');
-        html2canvas(input) 
-        .then(canvas => { const imgWidth = 210; // A4 size in mm
-         const pageHeight = 295; // A4 size in mm 
-         const imgHeight = (canvas.height * imgWidth) / canvas.width; 
-         const heightLeft = imgHeight; 
-         const pdf = new jsPDF('p', 'mm', 'a4'); 
-         let position = 0; 
-         pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, position, imgWidth, imgHeight); 
-         pdf.save('download.pdf'); })
+    
+    //const handleDownloadPDF=()=>{
+    // const input=document.querySelector('.resume-display');
+    //     html2canvas(input) 
+    //     .then(canvas => { const imgWidth = 210; // A4 size in mm
+    //      const pageHeight = 295; // A4 size in mm 
+    //      const imgHeight = (canvas.height * imgWidth) / canvas.width; 
+    //      const heightLeft = imgHeight; 
+    //      const pdf = new jsPDF('p', 'mm', 'a4'); 
+    //      let position = 0; 
+    //      pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, position, imgWidth, imgHeight); 
+    //      pdf.save('download.pdf'); })
+    // };
+//Used for downloading the html file as pdf in multiple pages
+    const handleDownloadPDF = () => { 
+        const input = document.querySelector('.resume-display');
+        html2canvas(input) .then(canvas => { const imgWidth = 210; // A4 size in mm
+            const pageHeight = 295; // A4 size in mm 
+            const imgHeight = (canvas.height * imgWidth) / canvas.width;
+            let heightLeft = imgHeight; const pdf = new jsPDF('p', 'mm', 'a4'); 
+            let position = 0;
+            pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, position, imgWidth, imgHeight);
+            heightLeft -= pageHeight;
+            while (heightLeft >= 0) {
+                position = heightLeft - imgHeight; pdf.addPage();
+                pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, position, imgWidth, imgHeight); 
+                heightLeft -= pageHeight;
+            } pdf.save('download.pdf'); 
+        });
     };
 
     return(

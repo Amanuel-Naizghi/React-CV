@@ -17,8 +17,8 @@ function App() {
         <Header></Header>
         <h1 className='headed-title'>Fill out your resume</h1>
         <hr></hr>
-        <ObjectiveDetails data={data} setData={setData}></ObjectiveDetails>
         <PersonalInfo data={data} setData={setData}></PersonalInfo>
+        <ObjectiveDetails data={data} setData={setData}></ObjectiveDetails>
         <EducationalExperience data={data} setData={setData}></EducationalExperience>
         <PracticalExperience data={data} setData={setData}></PracticalExperience>
         <TechnicalSkillsInformation data={data} setData={setData}></TechnicalSkillsInformation>
